@@ -15,8 +15,7 @@ class WidgetList extends React.Component {
             lessonId: 1,
             topicId: 1,
             assignment: [],
-            exam: [],
-            assignmentTitle:''
+            exam: []
         }
 
         this.assignmentService = AssignmentService.instance;
@@ -25,11 +24,6 @@ class WidgetList extends React.Component {
         this.examService = ExamService.instance;
         this.createExam=this.createExam.bind(this);
         this.deleteExam=this.deleteExam.bind(this);
-    }
-
-    handleOnNavigateBack = () => {
-        this.assignmentService.findAssignmentByTopicId(this.state.topicId)
-            .then(assn => (this.setState({assignment: assn})))
     }
 
     componentDidMount() {
@@ -63,7 +57,7 @@ class WidgetList extends React.Component {
     deleteAssignment(assnId){
         this.assignmentService.deleteAssignment(assnId)
         this.assignmentService.findAssignmentByTopicId(this.state.topicId)
-            .then(assn=> (this.setState({assignment: assn})))
+            .then(assn => (this.setState({assignment: assn})))
 
     }
 
@@ -99,18 +93,18 @@ class WidgetList extends React.Component {
                 <Button title='Add Assignment'
                         onPress={() => this.createAssignment()} />
                 {this.state.assignment.map(
-                    (assignment, index) => (
+                    (assignment, index) => {
+                        //console.log(assignment)
+                        return(
                         <ListItem
                             onPress= {() => this.props.navigation
-                                .navigate('AssignmentEditor', {assnId: assignment.id
-                                    ,onNavigateBack: this.handleOnNavigateBack}) }
+                                .navigate('AssignmentEditor', {'assnId': assignment.widgetId}) }
                             key = {index}
                             title = {assignment.title}
                             rightIcon = {<Icon name={'delete'}
                                                size={25}
-                                               onPress = {() => this.deleteAssignment(this.state.assignment.id)}
-                                        />}
-                        />))}
+                                               onPress = {() => this.deleteAssignment(assignment.widgetId)}/>} />)
+                    })}
 
                 <Text>{'\n'}</Text>
                 <Button title='Add Exam'
@@ -118,13 +112,10 @@ class WidgetList extends React.Component {
                 {this.state.exam.map( (exam, index)=>(
                     <ListItem title = {exam.title}
                               key={index}
-                              onPress={() => this.props.navigation.navigate('ExamEditor',{
-                                  examId: exam.id, exam: exam
-                              })}
+                              onPress={() => this.props.navigation.navigate('ExamEditor', {'examId': exam.widgetId})}
                               rightIcon={<Icon name={'delete'}
                                                size={25}
-                                               onPress={()=>this.deleteExam(this.state.exam.id)}/>}
-                    />
+                                               onPress={()=>this.deleteExam(exam.widgetId)}/>}/>
                 ))}
 
             </ScrollView>

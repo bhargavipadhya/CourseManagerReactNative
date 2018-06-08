@@ -33,15 +33,14 @@ class AssignmentService {
     }
 
     deleteAssignment(assnId){
-        return fetch('http://192.168.0.12:8080/api/assignment' + assnId,
+        fetch('http://192.168.0.12:8080/api/assignment/' + assnId,
             {
                 method: 'DELETE'
             })
-           // .then(response => (response.json()))
     }
 
     updateAssignment(assnId, assignment) {
-        return fetch('http://localhost:8080/api/assignment/' + assnId, {
+        return fetch('http://192.168.0.12:8080/api/assignment/' + assnId, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify(assignment)

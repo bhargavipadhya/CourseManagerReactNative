@@ -11,6 +11,11 @@ class ExamService{
         return this[_singleton]
     }
 
+    // findExamById(examId){
+    //     return fetch('http://192.168.0.12:8080/api/exam/'+ examId)
+    //         .then(response => (response.json()))
+    // }
+
     findExamByTopicId(topicId){
         return fetch('http://192.168.0.12:8080/api/topic/' + topicId + '/exam')
             .then(response=>(response.json()))

@@ -8,7 +8,13 @@ import LessonList from './components/LessonList'
 import TopicList from './components/TopicList'
 import WidgetList from './components/WidgetList'
 import AssignmentEditor from './components/AssignmentEditor'
+import ExamEditor from './components/ExamEditor'
 import FixedHeader from './elements/FixedHeader'
+import MCQEditor from './components/MCQEditor'
+import FIBEditor from './components/FIBEditor'
+import TFEditor from './components/TFEditor'
+import EssayEditor from './components/EssayEditor'
+
 
 class Home extends React.Component {
     static navigationOptions = {
@@ -24,7 +30,7 @@ class Home extends React.Component {
             <FixedHeader/>
 
             <Button title="Courses"
-                    onPress={() => this.props.navigation
+                    onPress = {() => this.props.navigation
                         .navigate('CourseList') } />
         </ScrollView>
     )
@@ -32,7 +38,7 @@ class Home extends React.Component {
 }
 
 const App = createStackNavigator({
-  Home, CourseList, ModuleList, LessonList, TopicList, WidgetList, AssignmentEditor
+  Home, CourseList, ModuleList, LessonList, TopicList, WidgetList, AssignmentEditor, ExamEditor, MCQEditor, TFEditor, FIBEditor, EssayEditor
 });
 export default App;
 
